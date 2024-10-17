@@ -16,17 +16,23 @@
     "deploy": "npx gh-pages -d dist"
   },
   "dependencies": {
+    "@react-three/drei": "^9.114.4",
+    "@react-three/fiber": "^8.17.10",
+    "@react-three/flex": "^1.0.1",
     "@tweenjs/tween.js": "^25.0.0",
     "@types/react-transition-group": "^4.4.11",
+    "@types/three": "^0.169.0",
     "i18next-browser-languagedetector": "^8.0.0",
     "mobile-detect": "^1.4.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.0.3",
     "react-router-dom": "^6.27.0",
+    "react-spring": "^9.7.4",
     "react-tooltip": "^5.28.0",
     "react-transition-group": "^4.4.5",
     "sass": "^1.79.5",
+    "three": "^0.169.0",
     "vite-plugin-svgr": "^4.2.0"
   },
   "devDependencies": {

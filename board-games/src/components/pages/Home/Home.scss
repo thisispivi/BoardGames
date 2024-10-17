@@ -1,0 +1,16 @@
+.canvas-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  .card {
+    flex-shrink: 0;
+    width: 15rem;
+    height: 15rem;
+    background-color: #121212;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+}
