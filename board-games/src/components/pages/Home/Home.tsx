@@ -33,7 +33,7 @@ const Cube: React.FC = () => {
   // Get maximum anisotropy once
   const maxAnisotropy = useMemo(
     () => new THREE.WebGLRenderer().capabilities.getMaxAnisotropy(),
-    []
+    [],
   );
 
   // Use the same material for all side faces to avoid redundant loading
