@@ -1,0 +1,5 @@
+cd "$(dirname "$0")/../board-games"
+
+npx tsc --noEmit
+npx lint-staged
+npm run lint
