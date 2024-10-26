@@ -15,7 +15,7 @@ function GameBox({ game }: GameBoxProps) {
 
   const maxAnisotropy = useMemo(
     () => new THREE.WebGLRenderer().capabilities.getMaxAnisotropy(),
-    []
+    [],
   );
 
   const cubeMaterials = useMemo(() => {
@@ -34,7 +34,7 @@ function GameBox({ game }: GameBoxProps) {
           roughness: 1,
           fog: false,
           map: loadTexture(url),
-        })
+        }),
     );
   }, [game, loader, maxAnisotropy]);
 
@@ -43,7 +43,7 @@ function GameBox({ game }: GameBoxProps) {
     const outlineGeo = new THREE.BoxGeometry(
       game.size[0] * scaleFactor,
       game.size[1] * scaleFactor,
-      game.size[2] * scaleFactor
+      game.size[2] * scaleFactor,
     );
     return outlineGeo;
   }, [game]);
@@ -54,7 +54,7 @@ function GameBox({ game }: GameBoxProps) {
         color: hovered ? 0xffffff : 0x000000,
         side: THREE.BackSide,
       }),
-    [hovered]
+    [hovered],
   );
 
   return (

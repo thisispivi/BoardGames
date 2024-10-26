@@ -60,7 +60,7 @@ function Effects() {
         8 + Math.atan(state.pointer.x * 2),
       ],
       0.3,
-      delta
+      delta,
     );
     state.camera.lookAt(state.camera.position.x * 0.9, 0, -4);
   });
