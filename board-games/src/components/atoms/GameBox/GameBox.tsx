@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
 import * as THREE from "three";
 import { Game } from "../../../core";
-import { Environment } from "@react-three/drei";
+import { WindowSize } from "../../../core/typings/window";
 
 interface GameBoxProps {
   game: Game;
+  windowSize: WindowSize;
 }
-
-function GameBox({ game }: GameBoxProps) {
+function GameBox({ game, windowSize }: GameBoxProps) {
   const [hovered, setHovered] = useState(false);
 
   const loader = useMemo(() => new THREE.TextureLoader(), []);
@@ -15,7 +15,7 @@ function GameBox({ game }: GameBoxProps) {
 
   const maxAnisotropy = useMemo(
     () => new THREE.WebGLRenderer().capabilities.getMaxAnisotropy(),
-    [],
+    []
   );
 
   const cubeMaterials = useMemo(() => {
@@ -30,11 +30,13 @@ function GameBox({ game }: GameBoxProps) {
     return game.getTextureUrlsAsArray().map(
       (url) =>
         new THREE.MeshStandardMaterial({
-          metalness: 1,
+          metalness: 0.6,
           roughness: 1,
+          emissive: new THREE.Color(0x222222),
+          emissiveIntensity: 0.5,
           fog: false,
           map: loadTexture(url),
-        }),
+        })
     );
   }, [game, loader, maxAnisotropy]);
 
@@ -43,7 +45,7 @@ function GameBox({ game }: GameBoxProps) {
     const outlineGeo = new THREE.BoxGeometry(
       game.size[0] * scaleFactor,
       game.size[1] * scaleFactor,
-      game.size[2] * scaleFactor,
+      game.size[2] * scaleFactor
     );
     return outlineGeo;
   }, [game]);
@@ -54,11 +56,11 @@ function GameBox({ game }: GameBoxProps) {
         color: hovered ? 0xffffff : 0x000000,
         side: THREE.BackSide,
       }),
-    [hovered],
+    [hovered]
   );
 
   return (
-    <group position={game.position}>
+    <group position={game.position[windowSize]} rotation={[0, 0, Math.PI / 2]}>
       <mesh
         geometry={geometry}
         material={cubeMaterials}
@@ -74,7 +76,6 @@ function GameBox({ game }: GameBoxProps) {
       {hovered ? (
         <mesh geometry={outlineGeometry} material={outlineMaterial} />
       ) : null}
-      <Environment environmentIntensity={0.4} preset="warehouse" />
     </group>
   );
 }

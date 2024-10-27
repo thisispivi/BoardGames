@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-type SizeType = {
+type WindowSize = {
   width: number;
   height: number;
 };
 
 export type ResponsiveType = {
-  window: SizeType;
-  inner: SizeType;
+  window: WindowSize;
+  inner: WindowSize;
 };
 
 /**
@@ -15,7 +15,7 @@ export type ResponsiveType = {
  * @returns {ResponsiveType} - Object containing the window size and the inner size
  */
 export default function useResponsive(): ResponsiveType {
-  const [windowCustom, setWindowCustom] = useState<SizeType>({
+  const [windowCustom, setWindowCustom] = useState<WindowSize>({
     width: window.innerWidth,
     height: window.innerHeight,
   });

@@ -1,19 +1,24 @@
+import { Positions } from "../typings/position";
+import { Size } from "../typings/size";
+
 interface GameData {
+  id: string;
   name: string;
-  size: [number, number, number];
+  size: Size;
   textures: {
     side: string | [string, string, string, string];
     top: string;
     bottom: string;
   };
-  position: [number, number, number];
+  position: Positions;
   rating?: number;
   acquireDate?: Date;
 }
 
 export class Game {
+  id: string;
   name: string;
-  size: [number, number, number];
+  size: Size;
   textures: {
     top: string;
     bottom: string;
@@ -22,13 +27,14 @@ export class Game {
     east: string;
     west: string;
   };
-  position: [number, number, number];
+  position: Positions;
   rating?: number;
   acquireDate?: Date;
 
-  constructor(data: GameData) {
+  constructor(data: GameData, divider = 25) {
+    this.id = data.id;
     this.name = data.name;
-    this.size = data.size;
+    this.size = data.size.map((value) => value / divider) as Size;
     this.textures = {
       top: data.textures.top,
       bottom: data.textures.bottom,
