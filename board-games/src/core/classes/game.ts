@@ -13,6 +13,7 @@ interface GameData {
   position: Positions;
   rating?: number;
   acquireDate?: Date;
+  rotation?: [number, number, number];
 }
 
 export class Game {
@@ -30,6 +31,7 @@ export class Game {
   position: Positions;
   rating?: number;
   acquireDate?: Date;
+  rotation: [number, number, number];
 
   constructor(data: GameData, divider = 25) {
     this.id = data.id;
@@ -54,6 +56,7 @@ export class Game {
     this.position = data.position;
     this.rating = data.rating;
     this.acquireDate = data.acquireDate;
+    this.rotation = data.rotation || [0, 0, 0];
   }
 
   getTextureUrlsAsArray() {

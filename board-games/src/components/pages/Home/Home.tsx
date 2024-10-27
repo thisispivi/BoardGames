@@ -9,7 +9,13 @@ import { useEffect, useMemo } from "react";
 import { WindowSize } from "../../../core/typings/window";
 import { Positions } from "../../../core/typings/position";
 
-extend({ Sky, Bvh, EffectComposer, Selection, N8AO });
+extend({
+  Sky,
+  Bvh,
+  EffectComposer,
+  Selection,
+  N8AO,
+});
 
 export default function Home() {
   const { windowSize, position } = useMemo(() => {
@@ -48,7 +54,9 @@ export default function Home() {
         <Bvh firstHitOnly>
           <Selection>
             <Effects />
-            <GameBox game={games[0]} windowSize={windowSize} />
+            {games.map((game) => (
+              <GameBox game={game} key={game.id} windowSize={windowSize} />
+            ))}
             <Scene position={position} rotation={[0, Math.PI / 2, 0]} />
           </Selection>
         </Bvh>
@@ -63,7 +71,7 @@ function Effects() {
       autoClear={false}
       enableNormalPass={false}
       multisampling={4}
-      stencilBuffer
+      stencilBuffer={true}
     >
       <N8AO
         aoRadius={0.5}

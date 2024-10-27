@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMemo, useState } from "react";
+import { useSpring, animated } from "@react-spring/three";
 import * as THREE from "three";
 import { Game } from "../../../core";
 import { WindowSize } from "../../../core/typings/window";
@@ -7,8 +9,10 @@ interface GameBoxProps {
   game: Game;
   windowSize: WindowSize;
 }
+
 function GameBox({ game, windowSize }: GameBoxProps) {
   const [hovered, setHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const loader = useMemo(() => new THREE.TextureLoader(), []);
   const geometry = useMemo(() => new THREE.BoxGeometry(...game.size), [game]);
@@ -59,8 +63,18 @@ function GameBox({ game, windowSize }: GameBoxProps) {
     [hovered]
   );
 
+  const { position, rotation } = useSpring({
+    position: isClicked ? [0, 0, 0] : game.position[windowSize],
+    rotation: isClicked ? [Math.PI / 2, 0, 0] : game.rotation,
+    config: { tension: 170, friction: 26 },
+  });
+
   return (
-    <group position={game.position[windowSize]} rotation={[0, 0, Math.PI / 2]}>
+    <animated.group
+      onClick={() => setIsClicked(!isClicked)}
+      position={position as any}
+      rotation={rotation as any}
+    >
       <mesh
         geometry={geometry}
         material={cubeMaterials}
@@ -76,7 +90,7 @@ function GameBox({ game, windowSize }: GameBoxProps) {
       {hovered ? (
         <mesh geometry={outlineGeometry} material={outlineMaterial} />
       ) : null}
-    </group>
+    </animated.group>
   );
 }
 
